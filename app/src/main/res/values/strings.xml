@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SimpleScreenLock</string>
+    <string name="lock_start">START</string>
+</resources>

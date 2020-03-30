@@ -2,7 +2,7 @@ package com.example.simplescreenlock;
 
 import android.os.CountDownTimer;
 
-public class CountDown extends CountDownTimer {
+public class CountDown extends CountDownTimer implements OnSetSecondsListener{
 
     OnFinishListener onFinishListener;
     OnTickListener onTickListener;

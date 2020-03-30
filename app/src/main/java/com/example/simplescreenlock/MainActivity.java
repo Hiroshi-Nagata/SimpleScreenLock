@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSetSeconds(long seconds) {
                         seconds = numberPicker.getValue();
+                        Log.d("mainactibiety", String.valueOf(numberPicker.getValue()));
                         setNumberPicker(seconds);
                     }
                 });
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setNumberPicker(long value) {
         this.seconds = value;
-        Log.d("mainactibiety", String.valueOf(numberPicker.getValue()));
+
 
     }
 }

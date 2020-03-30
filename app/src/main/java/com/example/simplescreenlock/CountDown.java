@@ -4,7 +4,6 @@ import android.os.CountDownTimer;
 
 public class CountDown extends CountDownTimer {
 
-    //ここにリスナーを入れるための変数を宣言する
     OnFinishListener onFinishListener;
     OnTickListener onTickListener;
     OnSetSecondsListener onSetSecondsListener;
@@ -14,19 +13,16 @@ public class CountDown extends CountDownTimer {
     }
 
     public void onSetSeconds(long seconds) {
-
         if (onSetSecondsListener != null) onSetSecondsListener.onSetSeconds(seconds);
     }
 
     @Override
     public void onTick(long millisUntilFinished) {
-        //毎秒呼ばれる (呼ばれる間隔は指定することができる)
         if (onTickListener != null) onTickListener.onTick(millisUntilFinished);
     }
 
     @Override
     public void onFinish() {
-        //数え終わった時に呼ばれる
         if (onFinishListener != null) onFinishListener.onFinish();
     }
 

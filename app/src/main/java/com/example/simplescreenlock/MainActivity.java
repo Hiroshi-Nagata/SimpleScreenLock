@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private int initialValue = -32400000;
     private NumberPicker numberPicker;
     private int hour;
-    private int seconds;
+    private long seconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         numberPicker = findViewById(R.id.text_number_picker);
         initNumberPicker();
 
-        countDown = new CountDown(setNumberPicker(), 1000);
+        countDown = new CountDown(1000, 1000);
 
 
         countDown.setOnFinishListener(new OnFinishListener() {
@@ -48,12 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        countDown.setOnSecondsListener(new OnSetSecondsListener() {
-            @Override
-            public void onSetSeconds(long seconds) {
-                seconds = numberPicker.getValue();
-            }
-        });
+
 
         textTimer = findViewById(R.id.text_timer);
         textTimer.setText(simpleDateFormat.format(initialValue));
@@ -62,7 +57,13 @@ public class MainActivity extends AppCompatActivity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setNumberPicker();
+                countDown.setOnSecondsListener(new OnSetSecondsListener() {
+                    @Override
+                    public void onSetSeconds(long seconds) {
+                        seconds = numberPicker.getValue();
+                        setNumberPicker(seconds);
+                    }
+                });
                 countDown.start();
             }
         });
@@ -74,11 +75,10 @@ public class MainActivity extends AppCompatActivity {
 //        return numberPicker.getValue();
     }
 
-    private int setNumberPicker() {
-        this.seconds = 24;
+    private void setNumberPicker(long value) {
+        this.seconds = value;
         Log.d("mainactibiety", String.valueOf(numberPicker.getValue()));
 
-        return seconds;
     }
 }
 

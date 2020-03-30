@@ -69,15 +69,6 @@ public class MainActivity extends AppCompatActivity {
         numberPicker.setMaxValue(24);
         numberPicker.setMinValue(0);
         numberPicker.setValue(5);
-//        return numberPicker.getValue();
-    }
-
-    private long getNumberPicker(long value) {
-        return value;
-    }
-
-    private void setNumberPicker(long value) {
-        this.seconds = value;
     }
 }
 

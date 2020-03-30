@@ -3,7 +3,6 @@ package com.example.simplescreenlock;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -23,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private int hour;
     private long seconds;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,41 +31,36 @@ public class MainActivity extends AppCompatActivity {
         numberPicker = findViewById(R.id.text_number_picker);
         initNumberPicker();
 
-        countDown = new CountDown(1000, 1000);
-
-
-        countDown.setOnFinishListener(new OnFinishListener() {
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onFinish() {
-                textTimer.setText(simpleDateFormat.format(initialValue));
-            }
-        });
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                seconds = numberPicker.getValue() * 1000;
+                countDown = new CountDown(seconds, 1000);
 
-        countDown.setOnTickListener(new OnTickListener() {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                textTimer.setText(simpleDateFormat.format(millisUntilFinished + initialValue));
-            }
-        });
-
-
-
-        textTimer = findViewById(R.id.text_timer);
-        textTimer.setText(simpleDateFormat.format(initialValue));
-
-        buttonStart = findViewById(R.id.text_timer_start);
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                countDown.setOnSecondsListener(new OnSetSecondsListener() {
+                countDown.setOnFinishListener(new OnFinishListener() {
                     @Override
-                    public void onSetSeconds(long seconds) {
-                        seconds = numberPicker.getValue();
-                        Log.d("mainactibiety", String.valueOf(numberPicker.getValue()));
-                        setNumberPicker(seconds);
+                    public void onFinish() {
+                        textTimer.setText(simpleDateFormat.format(initialValue));
                     }
                 });
-                countDown.start();
+
+                countDown.setOnTickListener(new OnTickListener() {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        textTimer.setText(simpleDateFormat.format(millisUntilFinished + initialValue + seconds));
+                    }
+                });
+
+                textTimer = findViewById(R.id.text_timer);
+                textTimer.setText(simpleDateFormat.format(initialValue));
+
+                buttonStart = findViewById(R.id.text_timer_start);
+                buttonStart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        countDown.start();
+                    }
+                });
             }
         });
     }
@@ -73,13 +68,16 @@ public class MainActivity extends AppCompatActivity {
     private void initNumberPicker() {
         numberPicker.setMaxValue(24);
         numberPicker.setMinValue(0);
+        numberPicker.setValue(5);
 //        return numberPicker.getValue();
+    }
+
+    private long getNumberPicker(long value) {
+        return value;
     }
 
     private void setNumberPicker(long value) {
         this.seconds = value;
-
-
     }
 }
 

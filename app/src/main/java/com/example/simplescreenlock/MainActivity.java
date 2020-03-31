@@ -13,52 +13,55 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CountDown countDown;
-    private TextView textTimer;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.JAPAN);
-    private Button buttonStart;
-    private int initialValue = -32400000;
-    private NumberPicker numberPicker;
-    private int hour;
-    private long seconds;
-
+    private CountDown mCountDown;
+    private TextView mTextTimer;
+    private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.JAPAN);
+    private Button mButtonStart;
+    private int mInitialValue = -32400000;
+    private NumberPicker mSecondsNumberPicker;
+    private NumberPicker mMinutesNumberPicker;
+    private NumberPicker mHourNumberPicker;
+    private long mSeconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        numberPicker = findViewById(R.id.text_number_picker);
+        mSecondsNumberPicker = findViewById(R.id.text_seconds_number_picker);
+        mMinutesNumberPicker = findViewById(R.id.text_minutes_number_picker);
+        mHourNumberPicker = findViewById(R.id.text_hour_number_picker);
+
         initNumberPicker();
 
-        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        mSecondsNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                seconds = numberPicker.getValue() * 1000;
-                countDown = new CountDown(seconds, 1000);
+                mSeconds = numberPicker.getValue() * 1000;
+                mCountDown = new CountDown(mSeconds, 1000);
 
-                countDown.setOnFinishListener(new OnFinishListener() {
+                mTextTimer = findViewById(R.id.text_timer);
+                mTextTimer.setText(mSimpleDateFormat.format(mInitialValue + mSeconds));
+
+                mCountDown.setOnFinishListener(new OnFinishListener() {
                     @Override
                     public void onFinish() {
-                        textTimer.setText(simpleDateFormat.format(initialValue));
+                        mTextTimer.setText(mSimpleDateFormat.format(mInitialValue));
                     }
                 });
 
-                countDown.setOnTickListener(new OnTickListener() {
+                mCountDown.setOnTickListener(new OnTickListener() {
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        textTimer.setText(simpleDateFormat.format(millisUntilFinished + initialValue + seconds));
+                        mTextTimer.setText(mSimpleDateFormat.format(millisUntilFinished + mInitialValue));
                     }
                 });
 
-                textTimer = findViewById(R.id.text_timer);
-                textTimer.setText(simpleDateFormat.format(initialValue));
-
-                buttonStart = findViewById(R.id.text_timer_start);
-                buttonStart.setOnClickListener(new View.OnClickListener() {
+                mButtonStart = findViewById(R.id.button_timer_start);
+                mButtonStart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        countDown.start();
+                        mCountDown.start();
                     }
                 });
             }
@@ -66,9 +69,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initNumberPicker() {
-        numberPicker.setMaxValue(24);
-        numberPicker.setMinValue(0);
-        numberPicker.setValue(5);
+        mSecondsNumberPicker.setValue(0);
+        mSecondsNumberPicker.setMaxValue(60);
+        mSecondsNumberPicker.setMinValue(0);
+
+        mMinutesNumberPicker.setValue(0);
+        mMinutesNumberPicker.setMaxValue(60);
+        mMinutesNumberPicker.setMinValue(0);
+
+        mHourNumberPicker.setValue(0);
+        mHourNumberPicker.setMaxValue(23);
+        mHourNumberPicker.setMinValue(0);
     }
 }
 

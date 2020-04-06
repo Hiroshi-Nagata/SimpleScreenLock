@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">SimpleScreenLock</string>
     <string name="lock_start">START</string>
+    <string name="text_hour">時間</string>
+    <string name="text_minutes">分</string>
+    <string name="text_seconds">秒</string>
+    <string name="text_title_dialog_lock_start">画面ロックを開始しますか？</string>
+    <string name="text_message_dialog_lock_start">画面ロックは設定した時間が経過するまで解除できません。</string>
+    <string name="text_positive_dialog_lock_start">OK</string>
+    <string name="text_negative_dialog_lock_start">キャンセル</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

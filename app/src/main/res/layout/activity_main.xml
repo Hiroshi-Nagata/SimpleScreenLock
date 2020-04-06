@@ -6,18 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/text_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_hour"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/text_hour_number_picker"
+        app:layout_constraintLeft_toLeftOf="@+id/text_hour_number_picker"
+        app:layout_constraintRight_toRightOf="@+id/text_hour_number_picker"/>
+
+    <TextView
+        android:id="@+id/text_minutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_minutes"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/text_minutes_number_picker"
+        app:layout_constraintLeft_toLeftOf="@+id/text_minutes_number_picker"
+        app:layout_constraintRight_toRightOf="@+id/text_minutes_number_picker"/>
+
+    <TextView
+        android:id="@+id/text_seconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_seconds"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/text_seconds_number_picker"
+        app:layout_constraintLeft_toLeftOf="@+id/text_seconds_number_picker"
+        app:layout_constraintRight_toRightOf="@+id/text_seconds_number_picker"/>
+
     <NumberPicker
         android:id="@+id/text_hour_number_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_hour"
         app:layout_constraintRight_toLeftOf="@+id/text_minutes_number_picker" />
 
     <NumberPicker
         android:id="@+id/text_minutes_number_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_minutes"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
@@ -25,7 +55,7 @@
         android:id="@+id/text_seconds_number_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_minutes"
         app:layout_constraintLeft_toRightOf="@+id/text_minutes_number_picker" />
 
     <TextView

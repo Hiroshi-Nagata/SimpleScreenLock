@@ -3,6 +3,7 @@ package com.example.simplescreenlock;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -25,9 +26,12 @@ public class MainActivity extends AppCompatActivity {
     private NumberPicker mSecondsNumberPicker;
     private NumberPicker mMinutesNumberPicker;
     private NumberPicker mHourNumberPicker;
-    private long mSeconds;
-    private long mMinutes;
-    private long mHour;
+    private int mSeconds;
+    private int mMinutes;
+    private int mHour;
+    private String mSECONDS_KEY = "mSECONDS_KEY";
+    private String mMINUTES_KEY = "mMINUTES_KEY";
+    private String mHOUR_KEY = "mHOUR_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(getApplicationContext(), ScreenLockActivity.class);
+                                Log.d("MainActivity", "seconds : " + getSeconds());
+                                intent.putExtra(mSECONDS_KEY, getSeconds());
+                                intent.putExtra(mMINUTES_KEY, getMinutes());
+                                intent.putExtra(mHOUR_KEY, getHour());
                                 startActivity(intent);
                             }
                         })
@@ -128,27 +136,27 @@ public class MainActivity extends AppCompatActivity {
         mHourNumberPicker.setMinValue(0);
     }
 
-    public long getSeconds() {
+    public int getSeconds() {
         return mSeconds;
     }
 
-    public void setSeconds(long seconds) {
+    public void setSeconds(int seconds) {
         this.mSeconds = seconds;
     }
 
-    public long getMinutes() {
+    public int getMinutes() {
         return mMinutes;
     }
 
-    public void setMinutes(long minutes) {
+    public void setMinutes(int minutes) {
         this.mMinutes = minutes;
     }
 
-    public long getHour() {
+    public int getHour() {
         return mHour;
     }
 
-    public void setHour(long hour) {
+    public void setHour(int hour) {
         this.mHour = hour;
     }
 }

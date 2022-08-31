@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //developブランチでの修正
         mSecondsNumberPicker = findViewById(R.id.text_seconds_number_picker);
         mMinutesNumberPicker = findViewById(R.id.text_minutes_number_picker);
         mHourNumberPicker = findViewById(R.id.text_hour_number_picker);
